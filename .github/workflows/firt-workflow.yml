@@ -5,9 +5,22 @@ jobs:
   run-shell-commands:
     runs-on: ubuntu-latest
     steps:
-      - name: echo a string
-        run: echo "Print string !!!"
+      - name: Echo a string
+        run: echo "Linux String !!!"
       - name: Multline Command
         run: |
           node -v
           npm -v
+  parallel-job-macos:
+    runs-on: macos-latest
+    steps:
+      - name: View SW Version
+        run: sw_vers
+  dependant-job:
+    runs-on: windows-lates
+    needs: run-shell-commands
+    steps:
+      - name: Echo a string
+        run: Write-Output "Windows String"
+      - name: Error step
+        run: doesnotexists
